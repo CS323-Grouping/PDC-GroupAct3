@@ -1,4 +1,4 @@
-# Laboratory Activity: Applying Task and Data Parallelism
+# Laboratory 3 – Applying Task and Data Parallelism using `concurrent.futures`
 
 ## Overview
 
