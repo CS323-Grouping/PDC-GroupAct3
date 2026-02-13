@@ -2,14 +2,7 @@ import json
 import random
 import os
 from datetime import datetime
-
-# --- CONFIGURATION ---
-NUM_EMPLOYEES = 20
-MIN_SALARY = 20000
-MAX_SALARY = 90000
-OUTPUT_DIR = "data"
-OUTPUT_FILE = "salary.json"
-FILE_PATH = os.path.join(OUTPUT_DIR, OUTPUT_FILE)
+import config
 
 FIRST_NAMES = [
     "Alice", "Bob", "Charlie", "Diana", "Edward", "Fiona", "George", "Hannah", 
@@ -28,52 +21,59 @@ def log(level, message):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}] [{level}] {message}")
 
-def generate_dataset(count):
+def generate_dataset():
     employees = []
-    total_salary = 0
+    
+    print(f"\n--- DATA GENERATOR CONFIGURATION ---")
+    user_input = input(f"Enter number of employees to generate [Default: {config.GEN_EMPLOYEE_COUNT}]: ").strip()
+    
+    if user_input:
+        try:
+            count = int(user_input)
+            if count <= 0:
+                print(">> Invalid number. Using default.")
+                count = config.GEN_EMPLOYEE_COUNT
+        except ValueError:
+            print(">> Invalid input. Using default.")
+            count = config.GEN_EMPLOYEE_COUNT
+    else:
+        count = config.GEN_EMPLOYEE_COUNT
 
-    log("INFO", "Starting employee dataset generation...")
-    log("INFO", f"Target record count: {count}")
-    log("INFO", f"Salary range: {MIN_SALARY} - {MAX_SALARY}")
-    log("INFO", f"Output path: {FILE_PATH}")
+    log("INFO", f"Starting generation of {count} employee records...")
+    log("INFO", f"Output path: {config.INPUT_FILE_PATH}")
 
-    for index in range(1, count + 1):
+    for _ in range(count):
         f_name = random.choice(FIRST_NAMES)
         l_name = random.choice(LAST_NAMES)
-        salary = round(random.uniform(MIN_SALARY, MAX_SALARY), 2)
+        salary = round(random.uniform(config.GEN_MIN_SALARY, config.GEN_MAX_SALARY), 2)
 
-        employee = {
+        employees.append({
             "name": f"{f_name} {l_name}",
             "salary": salary
-        }
+        })
 
-        employees.append(employee)
-        total_salary += salary
-
-        log("DEBUG", f"[{index}/{count}] Generated -> {employee['name']} | Salary: {salary}")
-
-    average_salary = round(total_salary / count, 2)
-
-    log("INFO", "Finished generating employee records.")
-    log("INFO", f"Total payroll generated: {round(total_salary, 2)}")
-    log("INFO", f"Average salary: {average_salary}")
-
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    log("INFO", f"Ensured directory '{OUTPUT_DIR}' exists.")
+    os.makedirs(config.DATA_DIR, exist_ok=True)
 
     try:
-        with open(FILE_PATH, "w") as f:
+        with open(config.INPUT_FILE_PATH, "w") as f:
             json.dump(employees, f, indent=4)
+        log("SUCCESS", f"Dataset successfully saved to '{config.INPUT_FILE_PATH}'")
+        
+        print("\n" + "="*40)
+        print(f"{'PREVIEW (First 5 Records)':^40}")
+        print("="*40)
+        print(f" {'NAME':<25} {'SALARY':>12}")
+        print("-" * 40)
 
-        file_size = os.path.getsize(FILE_PATH)
+        for emp in employees[:5]:
+            print(f" {emp['name']:<25} ₱{emp['salary']:>11,.2f}")
 
-        log("SUCCESS", f"Dataset successfully saved to '{FILE_PATH}'")
-        log("INFO", f"File size: {file_size} bytes")
+        print("-" * 40)
+        if count > 5:
+            print(f" ... and {count - 5} more records.")
 
     except IOError as e:
         log("ERROR", f"Failed to save file: {e}")
 
-    log("INFO", "Dataset generation process completed.")
-
 if __name__ == "__main__":
-    generate_dataset(NUM_EMPLOYEES)
+    generate_dataset()
