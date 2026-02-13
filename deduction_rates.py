@@ -1,18 +1,13 @@
-import time
-def calculate_pagibig(salary):
-    pagibig_rate = 0.02
-    pagibig = salary * pagibig_rate
-    return round(pagibig, 2)
+import config
 
-def calculate_tax(salary):
-    tax_rate = 0.10
-    tax = salary * tax_rate
-    return round(tax, 2)
+def compute_sss(salary: float) -> float:
+    return round(salary * config.RATE_SSS, 2)
 
-def compute_sss(salary):
-    return salary * 0.045
-def compute_philhealth(salary):
-    return salary * 0.025
+def compute_philhealth(salary: float) -> float:
+    return round(salary * config.RATE_PHILHEALTH, 2)
 
+def compute_pagibig(salary: float) -> float:
+    return round(salary * config.RATE_PAGIBIG, 2)
 
-
+def compute_tax(salary: float) -> float:
+    return round(salary * config.RATE_TAX, 2)
