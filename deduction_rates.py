@@ -8,11 +8,10 @@ def calculate_tax(salary):
     tax = salary * tax_rate
     return round(tax, 2)
 
-salary = 20000
+def compute_sss(salary):
+    return salary * 0.045
+def compute_philhealth(salary):
+    return salary * 0.025
 
-pagibig = calculate_pagibig(salary)
-tax = calculate_tax(salary)
 
-print(f"Salary: ₱{salary}")
-print(f"Pag-IBIG Contribution: ₱{pagibig}")
-print(f"Tax Deduction: ₱{tax}")
+
