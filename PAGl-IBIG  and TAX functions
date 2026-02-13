@@ -1,0 +1,5 @@
+def compute_pagibig(salary):
+    return salary * 0.02 
+
+def compute_tax(salary):
+    return salary * 0.10
