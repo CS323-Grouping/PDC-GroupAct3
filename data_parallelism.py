@@ -6,14 +6,6 @@ PHILHEALTH_RATE = 0.025
 PAGIBIG_RATE = 0.02
 TAX_RATE = 0.10
 
-employees = [
-    ("Employee_1", 25000),
-    ("Employee_2", 32000),
-    ("Employee_3", 28000),
-    ("Employee_4", 40000),
-    ("Employee_5", 35000)
-]
-
 def compute_payroll(employee):
     """
     Computes all deductions, total deduction,
@@ -39,10 +31,9 @@ def compute_payroll(employee):
         "net_salary": net_salary
     }
 
-
-if __name__ == "__main__":
+def dp_start(employees):
     with ProcessPoolExecutor() as executor:
-        results = executor.map(compute_payroll, employees)
+        results = executor.map(compute_payroll, employees.items())
 
         print("\n=== Payroll Results ===\n")
         for result in results:
