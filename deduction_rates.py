@@ -1,3 +1,4 @@
+import time
 def calculate_pagibig(salary):
     pagibig_rate = 0.02
     pagibig = salary * pagibig_rate
