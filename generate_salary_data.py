@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 # --- CONFIGURATION ---
-NUM_EMPLOYEES = 50
+NUM_EMPLOYEES = 5
 MIN_SALARY = 20000
 MAX_SALARY = 90000
 OUTPUT_DIR = "data"

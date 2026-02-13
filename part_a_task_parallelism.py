@@ -13,34 +13,27 @@ def log(level, message):
     print(f"[{timestamp}] [{level}] {message}")
 
 def display_payslip(name, salary, deductions, total_deduction, net_salary):
-    # --- DYNAMIC WIDTH CALCULATION ---
     w_label = 30
     w_amount = 18
-    # Structure: " " + label + " " + amount
-    # Total = 1 (leading space) + 30 + 1 (middle space) + 18
     table_width = 1 + w_label + 1 + w_amount
 
     print("\n" + "=" * table_width)
     print(f"{'P A Y S L I P':^{table_width}}")
     print("=" * table_width)
     
-    # We use the width variables inside the f-string formatting
     print(f" Employee Name : {name}")
     print(f" Gross Salary  : ₱{salary:,.2f}")
     print("-" * table_width)
     
-    # Header
     print(f" {'DEDUCTION TYPE':<{w_label}} {'AMOUNT':>{w_amount}}")
     print("-" * table_width)
     
-    # Rows
     for dtype, amount in deductions.items():
         formatted_amount = f"₱{amount:,.2f}"
         print(f" {dtype:<{w_label}} {formatted_amount:>{w_amount}}")
         
     print("-" * table_width)
     
-    # Totals
     f_total = f"₱{total_deduction:,.2f}"
     f_net = f"₱{net_salary:,.2f}"
     
@@ -48,7 +41,6 @@ def display_payslip(name, salary, deductions, total_deduction, net_salary):
     print(f" {'NET SALARY :':<{w_label}} {f_net:>{w_amount}}")
     print("=" * table_width + "\n")
 
-# --- REALISTIC DEDUCTION TASKS ---
 def compute_sss(salary):
     thread_name = threading.current_thread().name
     delay = random.uniform(0.5, 1.5)

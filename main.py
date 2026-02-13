@@ -28,7 +28,7 @@ def main_menu():
 
         if choice == '1':
             print("\n>> Running Data Generator...\n")
-            generate_salary_data.generate_dataset(25)
+            generate_salary_data.generate_dataset(5)
             input("\n>> Press Enter to return to menu...")
             
         elif choice == '2':
