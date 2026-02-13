@@ -1,9 +1,6 @@
 import os
 import sys
-import time
 
-# Import your existing modules
-# These filenames must match exactly what you saved earlier
 import generate_salary_data
 import part_a_task_parallelism
 import part_b_data_parallelism
@@ -32,7 +29,6 @@ def main_menu():
 
         if choice == '1':
             print("\n  >> Running Data Generator...")
-            # We call the main block of the generator script
             generate_salary_data.generate_dataset(25)
             input("\n  Press Enter to return to menu...")
             
