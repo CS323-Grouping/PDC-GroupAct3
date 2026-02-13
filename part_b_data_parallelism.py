@@ -64,7 +64,6 @@ def compute_payroll(employee):
     name = employee["name"]
     salary = employee["salary"]
     
-    # Random delay between 0.5s and 1.5s per employee
     delay = random.uniform(0.5, 1.5)
     
     log("PROCESS", f"[PID-{pid}] Processing {name}... ({delay:.2f}s)")
