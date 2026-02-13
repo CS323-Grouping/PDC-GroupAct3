@@ -24,7 +24,7 @@ def main_menu():
         print("  [0] Exit")
         print("\n" + "-" * 60)
         
-        choice = input("  Enter your choice (0-3): ").strip()
+        choice = input(">> Enter your choice (0-3): ").strip()
 
         if choice == '1':
             print("\n>> Running Data Generator...\n")
@@ -42,7 +42,7 @@ def main_menu():
             input("\n>> Press Enter to return to menu...")
             
         elif choice == '0':
-            print("\n  Exiting program. Goodbye!\n")
+            print("\nExiting program. Goodbye!\n")
             sys.exit()
             
         else:
